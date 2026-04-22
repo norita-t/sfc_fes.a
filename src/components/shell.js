@@ -15,18 +15,20 @@ export function renderShell({ routeName, pageClass = '', content }) {
           <h1 class="app-header__title">SFC Festival Guide</h1>
         </div>
         <div class="app-header__actions">
-          <button
-            class="theme-toggle"
-            type="button"
-            data-theme-toggle
-            aria-label="白テーマとダークモードを切り替え"
-            aria-pressed="${activeTheme === 'dark' ? 'true' : 'false'}"
-          >
-            <span class="theme-toggle__icon theme-toggle__icon--${themeIcon}" aria-hidden="true"></span>
-            <span class="theme-toggle__label">${themeLabel}</span>
-          </button>
-          <button class="header-chip-button ${routeName === 'favorites' ? 'is-active' : ''}" data-route="/favorites">お気に入り</button>
-          <button class="header-chip-button ${routeName === 'admin' ? 'is-active' : ''}" data-route="/admin">管理</button>
+          `+
+          //<button
+          //  class="theme-toggle"
+          //  type="button"
+          //  data-theme-toggle
+          //  aria-label="白テーマとダークモードを切り替え"
+          //  aria-pressed="${activeTheme === 'dark' ? 'true' : 'false'}"
+          //>
+          //  <span class="theme-toggle__icon theme-toggle__icon--${themeIcon}" aria-hidden="true"></span>
+          //  <span class="theme-toggle__label">${themeLabel}</span>
+          //</button>
+          //<button class="header-chip-button ${routeName === 'favorites' ? 'is-active' : ''}" data-route="/favorites">お気に入り</button>
+          //<button class="header-chip-button ${routeName === 'admin' ? 'is-active' : ''}" data-route="/admin">管理</button>
+            `
         </div>
       </header>
       <main class="page ${pageClass}">
