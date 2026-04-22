@@ -113,30 +113,39 @@ h2
   z-index: 40;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
-  padding: 16px 18px;
+  padding: 20px 18px;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(231, 235, 243, 0.88);
 }
 
+    .app-header > div {
+        display: flex;
+        flex-direction: column; /* ècï¿Ç— */
+        align-items: center; /* íÜâõëµÇ¶ */
+        text-align: center;
+    }
+
 .app-header__eyebrow,
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 auto;
+    color: var(--primary);
 }
 
 .app-header__title {
-  margin-top: 2px;
-  font-size: 20px;
-  line-height: 1.15;
+    margin-top: 2px;
+    font-size: 20px;
+    line-height: 1.15;
+    margin: 0 auto;
 }
 
 .app-header__actions {
@@ -1392,7 +1401,7 @@ body {
 }
 
 .app-shell--public .app-header {
-  padding-top: calc(14px + env(safe-area-inset-top));
+  padding-top: calc(20px + env(safe-area-inset-top));
 }
 
 .app-shell--public .bottom-nav {
@@ -1407,7 +1416,8 @@ body {
 
 .app-shell--public .quick-grid,
 .app-shell--public .quick-grid--home {
-  grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
 }
 
 .app-shell--public .detail-hero,
@@ -1439,7 +1449,7 @@ body {
 }
 
 .app-shell--public .quick-grid--home .quick-link:last-child {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
 
 .app-shell--public .quick-link {
@@ -2330,7 +2340,53 @@ body {
   .festival-map__directory-group {
     padding: 12px;
   }
+
+  .slider {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+    .slider-track {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+
+    .slider-track img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* =========================================================
    UD dark redesign v2026
@@ -3849,7 +3905,7 @@ padding: 15px;
 }
 
 .food-venue-guide__button {
-  grid-column: 1 / -1;
+  grid-column: auto;
   justify-content: center;
   min-height: 42px;
   font-size: 13px;
