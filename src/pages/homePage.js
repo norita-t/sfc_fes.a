@@ -16,13 +16,9 @@ function renderAnnouncementsBlock(announcements) {
   const items = [...(announcements ?? [])]
     .filter((a) => a && String(a.title || '').trim())
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
-  if (items.length === 0) {
-    return '';
-  }
-  return `
-    <section class="home-announcements" aria-labelledby="home-announcements-heading">
-      <h2 id="home-announcements-heading" class="home-announcements__heading">お知らせ</h2>
-      <ul class="home-announcements__list" role="list">
+  const listHtml =
+    items.length > 0
+      ? `<ul class="home-announcements__list" role="list">
         ${items
           .map(
             (n) => `
@@ -35,7 +31,12 @@ function renderAnnouncementsBlock(announcements) {
       `,
           )
           .join('')}
-      </ul>
+      </ul>`
+      : `<p class="home-announcements__empty">掲載中のお知らせはありません。追加・編集は <strong>管理</strong> 画面の <strong>お知らせ</strong> タブから行えます。</p>`;
+  return `
+    <section class="home-announcements" aria-labelledby="home-announcements-heading">
+      <h2 id="home-announcements-heading" class="home-announcements__heading">お知らせ</h2>
+      ${listHtml}
     </section>
   `;
 }

@@ -6,6 +6,10 @@ export function renderShell({ routeName, pageClass = '', content }) {
   const activeTheme = getActiveTheme();
   const themeIcon = getThemeToggleIcon();
   const themeLabel = getThemeToggleLabel();
+  const homeButton =
+    routeName === 'home'
+      ? ''
+      : `<button class="header-chip-button header-chip-button--home" type="button" data-route="/" aria-label="ホームに戻る">ホーム<span class="header-chip-button__arrow" aria-hidden="true">⇒</span></button>`;
 
   return `
     <div class="app-shell ${shellModeClass}">
@@ -15,6 +19,7 @@ export function renderShell({ routeName, pageClass = '', content }) {
           <h1 class="app-header__title">SFC Festival Guide</h1>
         </div>
         <div class="app-header__actions">
+          ${homeButton}
           <button
             class="theme-toggle"
             type="button"

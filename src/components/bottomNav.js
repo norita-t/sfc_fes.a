@@ -20,8 +20,9 @@ function renderNavIcon(icon) {
 }
 
 export function renderBottomNav(activeRouteName) {
+  // 再表示する場合: nav から bottom-nav--suppressed を外し、styles.css の同クラス定義を削除
   return `
-    <nav class="bottom-nav" aria-label="主要ナビゲーション">
+    <nav class="bottom-nav bottom-nav--suppressed" aria-label="主要ナビゲーション" aria-hidden="true">
       ${items
         .map(
           (item) => `

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
 
+/* 底ナビ: マークアップは出し続けるが非表示。再表示は bottomNav.js / このブロックのコメント参照 */
+.bottom-nav.bottom-nav--suppressed {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 :root {
     color-scheme: light;
     --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -179,10 +186,16 @@ h2
   border-color: rgba(37, 99, 235, 0.18);
 }
 
+.header-chip-button__arrow {
+  margin-left: 5px;
+  font-weight: 500;
+  opacity: 0.88;
+}
+
 .page {
   width: min(100%, var(--page-max));
   margin: 0 auto;
-  padding: 18px 18px 112px;
+  padding: 18px 18px calc(24px + env(safe-area-inset-bottom));
 }
 
 .hero-panel,
@@ -1252,7 +1265,7 @@ h2
 
 @media (min-width: 720px) {
   .page {
-    padding: 24px 24px 120px;
+    padding: 24px 24px calc(32px + env(safe-area-inset-bottom));
   }
 
   .hero-panel--home {
@@ -1409,7 +1422,7 @@ body {
 }
 
 .app-shell--public .page {
-  padding: 16px 16px calc(112px + env(safe-area-inset-bottom));
+  padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
 }
 
 .app-shell--admin .page {
@@ -1420,15 +1433,6 @@ body {
   padding-top: calc(14px + env(safe-area-inset-top));
 }
 
-.app-shell--public .bottom-nav {
-  width: min(calc(100% - 16px), 428px);
-  bottom: 8px;
-  padding-bottom: calc(8px + env(safe-area-inset-bottom));
-}
-
-.app-shell--admin .bottom-nav {
-  padding-bottom: calc(8px + env(safe-area-inset-bottom));
-}
 
 .app-shell--public .quick-grid,
 .app-shell--public .quick-grid--home {
@@ -1525,6 +1529,18 @@ body {
   margin-bottom: 0;
 }
 
+.home-announcements__empty {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.home-announcements__empty strong {
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
 :root[data-theme="dark"] .home-announcements {
   background: rgba(30, 41, 59, 0.55);
   border-color: rgba(148, 163, 184, 0.22);
@@ -1566,10 +1582,6 @@ body {
   color: var(--text-homecard);
 }
 
-.app-shell--public .quick-grid--home .quick-link:last-child {
-  grid-column: 1 / -1;
-}
-
 .app-shell--public .quick-link {
   min-height: 90px;
   padding: 14px;
@@ -1579,19 +1591,19 @@ body {
   font-size: 15px;
 }
 
-/* ホーム: クイックリンクのラベルをやや大きく、ポップ体に */
+/* ホーム: クイックリンクのラベル（サイズは維持、本文の UI 字体で整える） */
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
-  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-family: var(--font-ui);
   font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
-  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-family: var(--font-ui);
   font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary {
@@ -3652,7 +3664,7 @@ padding: 15px;
 
 .map-pullup {
   position: sticky;
-  bottom: calc(74px + env(safe-area-inset-bottom));
+  bottom: calc(12px + env(safe-area-inset-bottom));
   z-index: 28;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -3798,7 +3810,7 @@ padding: 15px;
   }
 
   .map-pullup {
-    bottom: calc(67px + env(safe-area-inset-bottom));
+    bottom: calc(8px + env(safe-area-inset-bottom));
     margin-inline: -2px;
   }
 }
@@ -3814,17 +3826,10 @@ padding: 15px;
 }
 
 /* =========================================================
-   vNext map polish: resized SVG viewports, room-to-project links,
-   larger bottom navigation pictograms
+   vNext map polish: resized SVG viewports, room-to-project links
    ========================================================= */
 .app-shell--public .page {
-  padding-bottom: calc(126px + env(safe-area-inset-bottom));
-}
-
-.app-shell--public .bottom-nav {
-  gap: 5px;
-  padding: 7px;
-  padding-bottom: calc(7px + env(safe-area-inset-bottom));
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
 }
 
 .bottom-nav__item {
@@ -3891,31 +3896,12 @@ padding: 15px;
 }
 
 .map-pullup {
-  bottom: calc(88px + env(safe-area-inset-bottom));
+  bottom: calc(12px + env(safe-area-inset-bottom));
 }
 
 @media (max-width: 430px) {
   .app-shell--public .page {
-    padding-bottom: calc(122px + env(safe-area-inset-bottom));
-  }
-
-  .bottom-nav__item {
-    min-height: 62px;
-  }
-
-  .bottom-nav__icon-box {
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-  }
-
-  .bottom-nav__icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .bottom-nav__label {
-    font-size: 10px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
 
   .festival-map__canvas {
@@ -3923,23 +3909,7 @@ padding: 15px;
   }
 
   .map-pullup {
-    bottom: calc(82px + env(safe-area-inset-bottom));
-  }
-}
-
-@media (max-width: 360px) {
-  .bottom-nav__icon-box {
-    width: 32px;
-    height: 32px;
-  }
-
-  .bottom-nav__icon {
-    width: 21px;
-    height: 21px;
-  }
-
-  .bottom-nav__label {
-    font-size: 9.5px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
   }
 }
 
@@ -4750,7 +4720,7 @@ padding: 15px;
    ========================================================= */
 .app-shell--public .page.page--timetable {
   width: min(100%, 520px);
-  padding: 10px 10px calc(126px + env(safe-area-inset-bottom));
+  padding: 10px 10px calc(28px + env(safe-area-inset-bottom));
 }
 
 .stage-page {
