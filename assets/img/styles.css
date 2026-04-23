@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
 
 /* 底ナビ: 古い JS のキャッシュで再マウントされていても画面に出さない */
 nav.bottom-nav {
@@ -11,6 +11,8 @@ nav.bottom-nav {
     color-scheme: light;
     --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
     --font-display: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
+    /* ホーム本文（ヘッダー外）: BIZ UD ゴシック + OS 同梱名 */
+    --font-biz-ud-gothic: 'BIZ UDPGothic', 'BIZ UDGothic', 'BIZ UD ゴシック', 'BIZ UDゴシック', 'Hiragino Kaku Gothic ProN', sans-serif;
     --bg: #ffffff;
     --surface: #ffffff;
     --surface-muted: #f6f9ff;
@@ -1486,9 +1488,10 @@ body {
   padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
 }
 
-/* ホーム: クイックリンクをヘッダー付近に寄せる */
+/* ホーム: クイックリンクをヘッダー付近に寄せる + 本文は BIZ UD ゴシック（ヘッダーは対象外） */
 .app-shell--public .page.page--home {
   padding-top: 6px;
+  font-family: var(--font-biz-ud-gothic);
 }
 
 .app-shell--admin .page {
@@ -1547,7 +1550,7 @@ body {
   border-radius: var(--radius-md);
   border: 1px solid rgba(8, 145, 178, 0.22);
   background: #f0f9ff;
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', 'Noto Sans JP', 'Meiryo', sans-serif;
+  font-family: var(--font-biz-ud-gothic);
   font-size: 14px;
   line-height: 1.65;
   color: var(--text);
@@ -1675,21 +1678,25 @@ body {
   font-size: 15px;
 }
 
-/* ホーム: クイックリンクのラベル（明朝系・太字） */
+/* ホーム: クイックリンク（BIZ UDゴシック、本文 main と同系統） */
+.app-shell--public .page.page--home .quick-link__body span.quick-link__hint {
+  font-family: var(--font-biz-ud-gothic);
+}
+
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
-  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-  font-size: 18px;
-  font-weight: 700; /* フォントが持っている最大値に合わせる */
-  -webkit-text-stroke: 0.5px currentColor; /* 0.5px分、外側に肉付け */
-  letter-spacing: 0.05em; /* 太くすると文字が詰まって見えるので少し広げるのがコツ */
+  font-family: var(--font-biz-ud-gothic);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  -webkit-text-stroke: 0.5px currentColor;
 }
 
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
-  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', '游明朝体', 'Noto Serif JP', 'MS PMincho', serif;
-  font-size: 15px;
-  font-weight: 1000;
+  font-family: var(--font-biz-ud-gothic);
+  font-size: 17px;
+  font-weight: 700;
   letter-spacing: 0.01em;
-  font-synthesis: weight;
+  -webkit-text-stroke: 0.5px currentColor;
 }
 
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary {
