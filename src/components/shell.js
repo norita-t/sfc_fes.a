@@ -1,4 +1,3 @@
-import { renderBottomNav } from './bottomNav.js';
 import { getThemeToggleIcon, getThemeToggleLabel, getActiveTheme } from '../utils/theme.js';
 
 export function renderShell({ routeName, pageClass = '', content }) {
@@ -6,6 +5,12 @@ export function renderShell({ routeName, pageClass = '', content }) {
   const activeTheme = getActiveTheme();
   const themeIcon = getThemeToggleIcon();
   const themeLabel = getThemeToggleLabel();
+  const isHome = routeName === 'home';
+  const homeButton = `<button class="header-chip-button header-chip-button--home${
+    isHome ? ' is-active' : ''
+  }" type="button" data-route="/" aria-label="ホームへ"${
+    isHome ? ' aria-current="page"' : ''
+  }>ホーム<span class="header-chip-button__arrow" aria-hidden="true">⇒</span></button>`;
 
   return `
     <div class="app-shell ${shellModeClass}">
@@ -15,6 +20,7 @@ export function renderShell({ routeName, pageClass = '', content }) {
           <h1 class="app-header__title">SFC Festival Guide</h1>
         </div>
         <div class="app-header__actions">
+          ${homeButton}
           <button
             class="theme-toggle"
             type="button"
@@ -32,7 +38,6 @@ export function renderShell({ routeName, pageClass = '', content }) {
       <main class="page ${pageClass}">
         ${content}
       </main>
-      ${renderBottomNav(routeName)}
     </div>
   `;
 }

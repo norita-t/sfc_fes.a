@@ -1,4 +1,5 @@
 import {
+  announcements,
   categories,
   contentBlocks,
   events,
@@ -41,6 +42,7 @@ export function isFestivalBootstrapData(value) {
     && Array.isArray(value.categories)
     && Array.isArray(value.foodBooths)
     && Array.isArray(value.contentBlocks)
+    && Array.isArray(value.announcements)
     && value.locations.length > 0
     && value.categories.length > 0
     && value.stageVenues.length > 0,
@@ -55,6 +57,9 @@ function readStoredData() {
     }
 
     const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed.announcements)) {
+      parsed.announcements = [];
+    }
     return isFestivalBootstrapData(parsed) ? cloneData(parsed) : null;
   } catch (error) {
     console.warn('Could not load festival data from localStorage.', error);
@@ -74,10 +79,14 @@ export const browserFestivalRepository = {
   },
 
   async saveBootstrapData(nextData) {
-    if (!isFestivalBootstrapData(nextData)) {
+    const normalized = {
+      ...nextData,
+      announcements: Array.isArray(nextData?.announcements) ? nextData.announcements : [],
+    };
+    if (!isFestivalBootstrapData(normalized)) {
       throw new Error('festival data shape is invalid');
     }
-    return writeStoredData(nextData);
+    return writeStoredData(normalized);
   },
 
   async resetBootstrapData() {

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
 
+/* 底ナビ: 古い JS のキャッシュで再マウントされていても画面に出さない */
+nav.bottom-nav {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 :root {
     color-scheme: light;
     --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -139,6 +146,21 @@ h2
   line-height: 1.15;
 }
 
+/* ヘッダー: ポップ体・大きめ */
+.app-header__eyebrow {
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.app-header__title {
+  font-family: 'Mochiy Pop One', var(--font-display);
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+
 .app-header__actions {
   display: flex;
   align-items: center;
@@ -151,8 +173,10 @@ h2
   border-radius: 999px;
   background: var(--surface-muted);
   color: var(--text-soft);
-  font-size: 13px;
-  font-weight: 700;
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   border: 1px solid transparent;
 }
 
@@ -162,10 +186,16 @@ h2
   border-color: rgba(37, 99, 235, 0.18);
 }
 
+.header-chip-button__arrow {
+  margin-left: 5px;
+  font-weight: 500;
+  opacity: 0.88;
+}
+
 .page {
   width: min(100%, var(--page-max));
   margin: 0 auto;
-  padding: 18px 18px 112px;
+  padding: 18px 18px calc(24px + env(safe-area-inset-bottom));
 }
 
 .hero-panel,
@@ -346,10 +376,11 @@ h2
         line-height: 1.45;
     }
 
-/* マップカード説明: 水色・ポップな書体（.quick-link__body span.quick-link__hint より詳細度を上げる） */
-.quick-link__body span.quick-link__hint--map-pop {
+/* マップカード説明: 水色（キャッシュ・継承で黒に戻るのを防ぐ） */
+.quick-link__body span.quick-link__hint--map-pop,
+.app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
   font-family: 'Mochiy Pop One', var(--font-ui);
-  color: #0891b2;
+  color: #0891b2 !important;
   font-size: 14px;
   letter-spacing: 0.04em;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -1235,7 +1266,7 @@ h2
 
 @media (min-width: 720px) {
   .page {
-    padding: 24px 24px 120px;
+    padding: 24px 24px calc(32px + env(safe-area-inset-bottom));
   }
 
   .hero-panel--home {
@@ -1323,8 +1354,7 @@ h2
 
 .section-header h2,
 .detail-hero__body h2,
-.hero-panel__copy h2,
-.app-header__title {
+.hero-panel__copy h2 {
   letter-spacing: -0.03em;
 }
 
@@ -1393,7 +1423,7 @@ body {
 }
 
 .app-shell--public .page {
-  padding: 16px 16px calc(112px + env(safe-area-inset-bottom));
+  padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
 }
 
 .app-shell--admin .page {
@@ -1404,15 +1434,6 @@ body {
   padding-top: calc(14px + env(safe-area-inset-top));
 }
 
-.app-shell--public .bottom-nav {
-  width: min(calc(100% - 16px), 428px);
-  bottom: 8px;
-  padding-bottom: calc(8px + env(safe-area-inset-bottom));
-}
-
-.app-shell--admin .bottom-nav {
-  padding-bottom: calc(8px + env(safe-area-inset-bottom));
-}
 
 .app-shell--public .quick-grid,
 .app-shell--public .quick-grid--home {
@@ -1445,14 +1466,89 @@ body {
   gap: 2px;
 }
 
-.app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body span.quick-link__hint {
   font-size: 12px;
   line-height: 1.35;
+}
+
+/* ホーム: お知らせ（管理の「お知らせ」から編集） */
+.home-announcements {
+  margin-top: 22px;
+  padding: 16px 16px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(8, 145, 178, 0.22);
+  background: #f0f9ff;
+}
+
+.home-announcements__heading {
+  margin: 0 0 12px;
+  font-family: 'Mochiy Pop One', var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.home-announcements__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.home-announcements__item {
+  margin: 0;
+  padding: 12px 0 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.home-announcements__item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.home-announcements__title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.home-announcements__body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.home-announcements__para {
+  margin: 0 0 8px;
+}
+
+.home-announcements__para:last-child {
+  margin-bottom: 0;
+}
+
+.home-announcements__empty {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.home-announcements__empty strong {
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+:root[data-theme="dark"] .home-announcements {
+  background: rgba(30, 41, 59, 0.55);
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+:root[data-theme="dark"] .home-announcements__item {
+  border-color: rgba(148, 163, 184, 0.16);
 }
 
 .app-shell--public .detail-hero,
@@ -1487,10 +1583,6 @@ body {
   color: var(--text-homecard);
 }
 
-.app-shell--public .quick-grid--home .quick-link:last-child {
-  grid-column: 1 / -1;
-}
-
 .app-shell--public .quick-link {
   min-height: 90px;
   padding: 14px;
@@ -1498,6 +1590,21 @@ body {
 
 .app-shell--public .quick-link__body strong {
   font-size: 15px;
+}
+
+/* ホーム: クイックリンクのラベル（サイズは維持、本文の UI 字体で整える） */
+.app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary {
@@ -1552,14 +1659,18 @@ body {
     padding-right: 14px;
   }
 
+  .app-header__eyebrow {
+    font-size: 13px;
+  }
+
   .app-header__title {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .header-chip-button {
     min-width: auto;
     padding: 9px 12px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .app-shell--public .page {
@@ -1868,9 +1979,11 @@ body {
 }
 
 .bottom-nav__label {
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1.15;
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
 }
 
 .bottom-nav__item.is-active .bottom-nav__icon-box {
@@ -1937,7 +2050,7 @@ body {
   }
 
   .bottom-nav__label {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .bottom-nav__icon-box {
@@ -2497,8 +2610,8 @@ color: var(--primary);
 }
 
 :root[data-theme="dark"] .app-header__title {
-color: var(--text);
-  letter-spacing: -0.04em;
+  color: var(--text);
+  letter-spacing: 0.04em;
 }
 
 :root[data-theme="dark"] .header-chip-button {
@@ -2700,8 +2813,9 @@ color: var(--text);
 color: var(--text-muted);
 }
 
-:root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop {
-  color: #5eead4;
+:root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop,
+:root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
+  color: #5eead4 !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
@@ -3552,7 +3666,7 @@ padding: 15px;
 
 .map-pullup {
   position: sticky;
-  bottom: calc(74px + env(safe-area-inset-bottom));
+  bottom: calc(12px + env(safe-area-inset-bottom));
   z-index: 28;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -3698,7 +3812,7 @@ padding: 15px;
   }
 
   .map-pullup {
-    bottom: calc(67px + env(safe-area-inset-bottom));
+    bottom: calc(8px + env(safe-area-inset-bottom));
     margin-inline: -2px;
   }
 }
@@ -3714,17 +3828,10 @@ padding: 15px;
 }
 
 /* =========================================================
-   vNext map polish: resized SVG viewports, room-to-project links,
-   larger bottom navigation pictograms
+   vNext map polish: resized SVG viewports, room-to-project links
    ========================================================= */
 .app-shell--public .page {
-  padding-bottom: calc(126px + env(safe-area-inset-bottom));
-}
-
-.app-shell--public .bottom-nav {
-  gap: 5px;
-  padding: 7px;
-  padding-bottom: calc(7px + env(safe-area-inset-bottom));
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
 }
 
 .bottom-nav__item {
@@ -3746,8 +3853,8 @@ padding: 15px;
 }
 
 .bottom-nav__label {
-  font-size: 9.5px;
-  line-height: 1.08;
+  font-size: 10.5px;
+  line-height: 1.1;
 }
 
 .festival-map__canvas {
@@ -3791,31 +3898,12 @@ padding: 15px;
 }
 
 .map-pullup {
-  bottom: calc(88px + env(safe-area-inset-bottom));
+  bottom: calc(12px + env(safe-area-inset-bottom));
 }
 
 @media (max-width: 430px) {
   .app-shell--public .page {
-    padding-bottom: calc(122px + env(safe-area-inset-bottom));
-  }
-
-  .bottom-nav__item {
-    min-height: 62px;
-  }
-
-  .bottom-nav__icon-box {
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-  }
-
-  .bottom-nav__icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .bottom-nav__label {
-    font-size: 9px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
 
   .festival-map__canvas {
@@ -3823,23 +3911,7 @@ padding: 15px;
   }
 
   .map-pullup {
-    bottom: calc(82px + env(safe-area-inset-bottom));
-  }
-}
-
-@media (max-width: 360px) {
-  .bottom-nav__icon-box {
-    width: 32px;
-    height: 32px;
-  }
-
-  .bottom-nav__icon {
-    width: 21px;
-    height: 21px;
-  }
-
-  .bottom-nav__label {
-    font-size: 8.6px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
   }
 }
 
@@ -4650,7 +4722,7 @@ padding: 15px;
    ========================================================= */
 .app-shell--public .page.page--timetable {
   width: min(100%, 520px);
-  padding: 10px 10px calc(126px + env(safe-area-inset-bottom));
+  padding: 10px 10px calc(28px + env(safe-area-inset-bottom));
 }
 
 .stage-page {

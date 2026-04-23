@@ -1,4 +1,5 @@
 import {
+  announcements,
   categories,
   contentBlocks,
   events,
@@ -20,6 +21,7 @@ export const mockFestivalRepository = {
       categories,
       foodBooths,
       contentBlocks,
+      announcements,
       mapFloors,
       stageDayVisuals,
     };

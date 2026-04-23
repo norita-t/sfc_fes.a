@@ -68,6 +68,12 @@ export const adminCollectionMeta = {
     singular: '画面文言',
     description: '各ページの説明文や補足テキストを編集します。',
   },
+  announcements: {
+    key: 'announcements',
+    label: 'お知らせ',
+    singular: 'お知らせ',
+    description: 'ホーム最下部の「お知らせ」欄に表示します。見出し・本文・表示順を設定できます。',
+  },
 };
 
 function cloneData(value) {
@@ -154,6 +160,7 @@ export function getCollectionCountSummary(data) {
     { key: 'locations', label: 'エリア', value: `${getCollectionItems(data, 'locations').length}件` },
     { key: 'categories', label: 'ラベル', value: `${getCollectionItems(data, 'categories').length}件` },
     { key: 'contentBlocks', label: '画面文言', value: `${getCollectionItems(data, 'contentBlocks').length}件` },
+    { key: 'announcements', label: 'お知らせ', value: `${getCollectionItems(data, 'announcements').length}件` },
   ];
 }
 
@@ -250,6 +257,15 @@ export function getEmptyItem(collectionKey, data) {
     };
   }
 
+  if (collectionKey === 'announcements') {
+    return {
+      id: 'new-notice',
+      title: '',
+      body: '',
+      sortOrder: getCollectionItems(data, 'announcements').length + 1,
+    };
+  }
+
   return {
     id: 'new-category',
     label: '',
@@ -319,6 +335,10 @@ export function getSearchText(collectionKey, item, data) {
     return [item.id, item.title, item.section, item.text].join(' ');
   }
 
+  if (collectionKey === 'announcements') {
+    return [item.id, item.title, item.body].join(' ');
+  }
+
   return [item.id, item.label, item.jpLabel].join(' ');
 }
 
@@ -341,6 +361,9 @@ export function getItemTitle(collectionKey, item) {
     return item.title || item.id;
   }
   if (collectionKey === 'contentBlocks') {
+    return item.title || item.id;
+  }
+  if (collectionKey === 'announcements') {
     return item.title || item.id;
   }
   return item.name || item.id;
@@ -371,6 +394,10 @@ export function getItemSubtitle(collectionKey, item, data) {
 
   if (collectionKey === 'contentBlocks') {
     return `${item.section || '画面文言'} ・ ${item.text || ''}`;
+  }
+
+  if (collectionKey === 'announcements') {
+    return `順序 ${item.sortOrder ?? 0} ・ ${(item.body || '').slice(0, 40)}${(item.body || '').length > 40 ? '…' : ''}`;
   }
 
   return `${item.label || '-'} / ${item.jpLabel || '-'}`;
@@ -466,6 +493,15 @@ export function createItemFromForm(collectionKey, form) {
       title: normalizeText(values.title),
       section: normalizeText(values.section),
       text: normalizeText(values.text),
+    };
+  }
+
+  if (collectionKey === 'announcements') {
+    return {
+      id: normalizeText(values.id),
+      title: normalizeText(values.title),
+      body: normalizeText(values.body),
+      sortOrder: Math.max(0, Number(values.sortOrder) || 0),
     };
   }
 
@@ -576,6 +612,13 @@ function validateContentBlockItem(item) {
   }
 }
 
+function validateAnnouncementItem(item) {
+  assertIdFormat(item.id);
+  if (!item.title) {
+    throw new Error('お知らせの見出しは必須です。');
+  }
+}
+
 function replaceItemById(items, previousId, nextItem) {
   const existingIndex = items.findIndex((item) => item.id === previousId);
   if (existingIndex === -1) {
@@ -659,6 +702,12 @@ export function upsertCollectionItem(data, collectionKey, nextItem, previousId =
     return nextData;
   }
 
+  if (collectionKey === 'announcements') {
+    validateAnnouncementItem(nextItem);
+    nextData.announcements = replaceItemById(nextData.announcements, effectivePreviousId ?? nextItem.id, nextItem);
+    return nextData;
+  }
+
   validateCategoryItem(nextItem);
   nextData.categories = replaceItemById(nextData.categories, effectivePreviousId ?? nextItem.id, nextItem);
 
@@ -721,6 +770,11 @@ export function removeCollectionItem(data, collectionKey, itemId) {
     return nextData;
   }
 
+  if (collectionKey === 'announcements') {
+    nextData.announcements = nextData.announcements.filter((item) => item.id !== itemId);
+    return nextData;
+  }
+
   nextData.foodBooths = nextData.foodBooths.filter((item) => item.id !== itemId);
   return nextData;
 }
@@ -764,6 +818,9 @@ export function duplicateCollectionItem(data, collectionKey, itemId) {
   if ('text' in duplicate && collectionKey === 'contentBlocks') {
     duplicate.text = `${duplicate.text}`;
     duplicate.title = `${duplicate.title}（コピー）`;
+  }
+  if (collectionKey === 'announcements') {
+    duplicate.sortOrder = getCollectionItems(data, 'announcements').length + 1;
   }
   if (collectionKey === 'locations' && duplicate.map?.mode === 'rect') {
     duplicate.map = {

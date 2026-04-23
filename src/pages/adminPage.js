@@ -17,7 +17,7 @@ import {
   upsertCollectionItem,
 } from '../utils/adminData.js';
 
-const collectionOrder = ['events', 'stagePrograms', 'foodBooths', 'locations', 'categories', 'contentBlocks'];
+const collectionOrder = ['events', 'stagePrograms', 'foodBooths', 'locations', 'categories', 'contentBlocks', 'announcements'];
 const crowdOptions = [
   { value: 'low', label: 'Low / 空き気味' },
   { value: 'medium', label: 'Medium / ふつう' },
@@ -395,6 +395,17 @@ function renderContentBlockForm(item) {
   `;
 }
 
+function renderAnnouncementForm(item) {
+  return `
+    <div class="admin-form-grid">
+      ${renderTextField({ label: 'ID', name: 'id', value: item.id, required: true, hint: '半角英小文字・数字・ハイフン。例: rain-notice' })}
+      ${renderTextField({ label: '見出し', name: 'title', value: item.title, required: true, placeholder: '雨天時のステージについて' })}
+      ${renderTextField({ label: '表示順', name: 'sortOrder', value: String(item.sortOrder ?? 0), type: 'number', min: 0, max: 999, step: 1, hint: '小さいほど上に表示します。' })}
+    </div>
+    ${renderTextAreaField({ label: '本文', name: 'body', value: item.body, rows: 5, placeholder: 'お知らせの内容。改行すると段落分かれします。' })}
+  `;
+}
+
 function renderEditorForm(context) {
   const { item, mode } = getSelectedItem(context);
   const meta = adminCollectionMeta[pageState.activeCollection];
@@ -413,7 +424,9 @@ function renderEditorForm(context) {
           ? renderLocationForm(item, context)
           : pageState.activeCollection === 'contentBlocks'
             ? renderContentBlockForm(item)
-            : renderCategoryForm(item);
+            : pageState.activeCollection === 'announcements'
+              ? renderAnnouncementForm(item)
+              : renderCategoryForm(item);
 
   return `
     <article class="admin-panel-card admin-editor-card">
@@ -552,8 +565,11 @@ async function importData(context, file) {
     const rawText = await file.text();
     const parsed = JSON.parse(rawText);
 
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed.announcements)) {
+      parsed.announcements = [];
+    }
     if (!isFestivalBootstrapData(parsed)) {
-      throw new Error('events / stagePrograms / stageVenues / locations / categories / foodBooths / contentBlocks を含むJSONを読み込んでください。');
+      throw new Error('events / stagePrograms / stageVenues / locations / categories / foodBooths / contentBlocks / announcements を含むJSONを読み込んでください。');
     }
 
     pageState.selectedId = null;
