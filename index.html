@@ -24,6 +24,23 @@
       })();
     </script>
     <link rel="stylesheet" href="./assets/img/styles.css" />
+    <!-- 外部 CSS がキャッシュで古いときの保険（HTML 更新分は必ず再取得される想定） -->
+    <style>
+      nav.bottom-nav {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+      /* マップ行: クラス名に頼らず data-route で水色（ホームの最初のカード＝/map 想定） */
+      button[data-route='/map'] .quick-link__body span.quick-link__hint,
+      .quick-link__body span.quick-link__hint--map-pop {
+        color: #0e7490 !important;
+      }
+      :root[data-theme='dark'] button[data-route='/map'] .quick-link__body span.quick-link__hint,
+      :root[data-theme='dark'] .quick-link__body span.quick-link__hint--map-pop {
+        color: #2dd4bf !important;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

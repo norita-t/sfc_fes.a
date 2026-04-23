@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
 
+/* 底ナビ: 古い JS のキャッシュで再マウントされていても画面に出さない */
+nav.bottom-nav {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 :root {
     color-scheme: light;
     --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -369,11 +376,11 @@ h2
         line-height: 1.45;
     }
 
-/* マップカード説明: 水色（詳細度を上げ、ホーム上書きに負けない） */
+/* マップカード説明: 水色（キャッシュ・継承で黒に戻るのを防ぐ） */
 .quick-link__body span.quick-link__hint--map-pop,
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
   font-family: 'Mochiy Pop One', var(--font-ui);
-  color: #0891b2;
+  color: #0891b2 !important;
   font-size: 14px;
   letter-spacing: 0.04em;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -2808,7 +2815,7 @@ color: var(--text-muted);
 
 :root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop,
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
-  color: #5eead4;
+  color: #5eead4 !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
