@@ -1,4 +1,3 @@
-import { renderBottomNav } from './bottomNav.js';
 import { getThemeToggleIcon, getThemeToggleLabel, getActiveTheme } from '../utils/theme.js';
 
 export function renderShell({ routeName, pageClass = '', content }) {
@@ -37,7 +36,6 @@ export function renderShell({ routeName, pageClass = '', content }) {
       <main class="page ${pageClass}">
         ${content}
       </main>
-      ${renderBottomNav(routeName)}
     </div>
   `;
 }

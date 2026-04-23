@@ -1,3 +1,4 @@
+/** 底ナビ: `shell.js` の `</main>` 直後に `renderBottomNav(routeName)` を挿入すると有効。 */
 const items = [
   { route: '/', label: 'ホーム', icon: 'home', match: ['home'] },
   { route: '/projects', label: '企画', icon: 'projects', match: ['events', 'event-detail'] },
@@ -20,9 +21,8 @@ function renderNavIcon(icon) {
 }
 
 export function renderBottomNav(activeRouteName) {
-  // 再表示する場合: nav から bottom-nav--suppressed を外し、styles.css の同クラス定義を削除
   return `
-    <nav class="bottom-nav bottom-nav--suppressed" aria-label="主要ナビゲーション" aria-hidden="true">
+    <nav class="bottom-nav" aria-label="主要ナビゲーション">
       ${items
         .map(
           (item) => `

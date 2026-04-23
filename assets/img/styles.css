@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Mochiy+Pop+One&display=swap');
 
-/* 底ナビ: マークアップは出し続けるが非表示。再表示は bottomNav.js / このブロックのコメント参照 */
-.bottom-nav.bottom-nav--suppressed {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
 :root {
     color-scheme: light;
     --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -376,8 +369,9 @@ h2
         line-height: 1.45;
     }
 
-/* マップカード説明: 水色・ポップな書体（.quick-link__body span.quick-link__hint より詳細度を上げる） */
-.quick-link__body span.quick-link__hint--map-pop {
+/* マップカード説明: 水色（詳細度を上げ、ホーム上書きに負けない） */
+.quick-link__body span.quick-link__hint--map-pop,
+.app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
   font-family: 'Mochiy Pop One', var(--font-ui);
   color: #0891b2;
   font-size: 14px;
@@ -2812,7 +2806,8 @@ color: var(--text);
 color: var(--text-muted);
 }
 
-:root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop {
+:root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop,
+:root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
   color: #5eead4;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
