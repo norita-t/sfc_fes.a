@@ -110,14 +110,25 @@ h2
 }
 
 .app-shell {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--bg);
 }
 
-.app-header {
+/* ヘッダー＋ホーム帯をまとめて先頭に固定（スクロールしても見える） */
+.app-sticky-chrome {
   position: sticky;
   top: 0;
   z-index: 40;
+  flex-shrink: 0;
+  width: 100%;
+  align-self: stretch;
+}
+
+.app-header {
+  position: relative;
+  z-index: 0;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -146,12 +157,6 @@ h2
   color: var(--primary);
 }
 
-.app-header__title {
-  margin-top: 2px;
-  font-size: 20px;
-  line-height: 1.15;
-}
-
 /* ヘッダー: ポップ体・大きめ */
 .app-header__eyebrow {
   font-family: 'Mochiy Pop One', var(--font-ui);
@@ -160,9 +165,11 @@ h2
   letter-spacing: 0.12em;
 }
 
-/* 旧「Keio SFC...」行を Spark 表示（大きく・斜体） */
+/* Spark: 1段大きい（従来 clamp(22..34) → 拡大） */
 .app-header__eyebrow--spark {
-  font-size: clamp(22px, 4.2vw, 34px);
+  position: relative;
+  top: -3px;
+  font-size: clamp(20px, 5.2vw, 42px);
   font-style: italic;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -171,9 +178,11 @@ h2
   margin: 0;
 }
 
+/* タイトル: 1段小さい（従来 25px → 20px） */
 .app-header__title {
+  margin-top: 2px;
   font-family: 'Mochiy Pop One', var(--font-display);
-  font-size: 25px;
+  font-size: 14px;
   line-height: 1.1;
   letter-spacing: 0.04em;
 }
@@ -214,7 +223,46 @@ h2
   opacity: 0.88;
 }
 
+/* ヘッダー直下: ホームに戻る（app-sticky-chrome 内でヘッダーと一体で追従） */
+.app-home-rail {
+  display: flex;
+  align-items: center;
+  padding: 4px 18px 5px 16px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.app-home-rail__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin: 0;
+  padding: 4px 4px 4px 0;
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 14px;
+  color: #111;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.app-home-rail__link:hover {
+  color: #0a0a0a;
+  opacity: 0.9;
+}
+
+.app-home-rail__arrow {
+  font-weight: 600;
+  margin-right: 1px;
+}
+
 .page {
+  flex: 1 1 auto;
+  min-width: 0;
   width: min(100%, var(--page-max));
   margin: 0 auto;
   padding: 18px 18px calc(24px + env(safe-area-inset-bottom));
@@ -1438,6 +1486,11 @@ body {
   padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
 }
 
+/* ホーム: クイックリンクをヘッダー付近に寄せる */
+.app-shell--public .page.page--home {
+  padding-top: 6px;
+}
+
 .app-shell--admin .page {
   width: min(100%, var(--page-max-admin));
 }
@@ -1451,6 +1504,10 @@ body {
 .app-shell--public .quick-grid--home {
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
+}
+
+.app-shell--public .quick-grid--home {
+  margin-top: 4px;
 }
 
 /* ホーム: 主要3件は全幅で強調、飲食・お気に入りは1行2列のコンパクト（下記は .app-shell--public .quick-link より詳細度を上げる） */
@@ -1483,21 +1540,30 @@ body {
   line-height: 1.35;
 }
 
-/* ホーム: お知らせ（管理の「お知らせ」から編集） */
+/* ホーム: お知らせ（管理の「お知らせ」から編集）— 可読性の高いゴシックで統一 */
 .home-announcements {
   margin-top: 22px;
   padding: 16px 16px 12px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(8, 145, 178, 0.22);
   background: #f0f9ff;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', 'Noto Sans JP', 'Meiryo', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
 }
 
+/* グローバル h2（左線・帯色・Mochiy）を打ち消し、本文ブロックのゴシックに合わせる */
 .home-announcements__heading {
   margin: 0 0 12px;
-  font-family: 'Mochiy Pop One', var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
   color: var(--text);
 }
 
@@ -1522,16 +1588,20 @@ body {
 
 .home-announcements__title {
   margin: 0 0 6px;
+  font-family: inherit;
   font-size: 15px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-weight: 600;
+  line-height: 1.45;
   color: var(--text);
+  letter-spacing: 0.02em;
 }
 
 .home-announcements__body {
   font-size: 13px;
-  line-height: 1.6;
-  color: var(--text-soft);
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.9;
+  letter-spacing: 0.01em;
 }
 
 .home-announcements__para {
@@ -1545,8 +1615,9 @@ body {
 .home-announcements__empty {
   margin: 0;
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.65;
   color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 .home-announcements__empty strong {
@@ -1604,19 +1675,21 @@ body {
   font-size: 15px;
 }
 
-/* ホーム: クイックリンクのラベル（明朝系） */
+/* ホーム: クイックリンクのラベル（明朝系・太字） */
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
-  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', '游明朝体', 'Noto Serif JP', 'MS PMincho', serif;
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-weight: 700; /* フォントが持っている最大値に合わせる */
+  -webkit-text-stroke: 0.5px currentColor; /* 0.5px分、外側に肉付け */
+  letter-spacing: 0.05em; /* 太くすると文字が詰まって見えるので少し広げるのがコツ */
 }
 
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
   font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', '游明朝体', 'Noto Serif JP', 'MS PMincho', serif;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 1000;
   letter-spacing: 0.01em;
+  font-synthesis: weight;
 }
 
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary {
@@ -1671,12 +1744,21 @@ body {
     padding-right: 14px;
   }
 
+  .app-home-rail {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
   .app-header__eyebrow:not(.app-header__eyebrow--spark) {
-    font-size: 13px;
+    font-size: 15px;
+  }
+
+  .app-header__eyebrow--spark {
+    font-size: clamp(24px, 4.6vw, 38px);
   }
 
   .app-header__title {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .header-chip-button {
@@ -1746,12 +1828,21 @@ body {
     padding-right: 10px;
   }
 
+  .app-home-rail {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .app-header__eyebrow:not(.app-header__eyebrow--spark) {
     font-size: 11px;
   }
 
+  .app-header__eyebrow--spark {
+    font-size: clamp(22px, 5.6vw, 36px);
+  }
+
   .app-header__title {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .app-header__actions {
@@ -2638,6 +2729,20 @@ background: rgba(7, 11, 22, 0.86);
 :root[data-theme="dark"] .app-header__eyebrow,
 :root[data-theme="dark"] .eyebrow {
 color: var(--primary);
+}
+
+:root[data-theme="dark"] .app-home-rail {
+  background: rgba(7, 11, 22, 0.92);
+  border-bottom-color: rgba(226, 232, 240, 0.12);
+}
+
+:root[data-theme="dark"] .app-home-rail__link {
+  color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .app-home-rail__link:hover {
+  color: #f8fafc;
+  opacity: 0.95;
 }
 
 :root[data-theme="dark"] .app-header__title {
