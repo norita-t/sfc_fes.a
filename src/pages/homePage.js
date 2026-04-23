@@ -47,7 +47,7 @@ export const homePage = {
 
 
       <section class="quick-grid quick-grid--home">
-        ${renderQuickLink('マップ', '/map', '', 'assets/img/map.png', '', 'quick-link--home-primary')}
+        ${renderQuickLink('マッaaaプ', '/map', '', 'assets/img/map.png', '', 'quick-link--home-primary')}
         ${renderQuickLink('企画', '/projects', '', 'assets/img/attractions.png', '', 'quick-link--home-primary')}
         ${renderQuickLink('ステージ公演', '/stage', '', 'assets/img/event.png', '', 'quick-link--home-primary')}
         ${renderQuickLink('飲食', '/food', '', 'assets/img/food.png', '', 'quick-link--home-secondary')}
