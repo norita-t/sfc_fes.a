@@ -14,7 +14,7 @@ export function renderShell({ routeName, pageClass = '', content }) {
     <div class="app-shell ${shellModeClass}">
       <header class="app-header">
         <div>
-          <p class="app-header__eyebrow">Keio SFC School Festival</p>
+          <p class="app-header__eyebrow app-header__eyebrow--spark">Spark</p>
           <h1 class="app-header__title">SFC Festival Guide</h1>
         </div>
         <div class="app-header__actions">

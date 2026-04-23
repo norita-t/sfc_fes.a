@@ -160,6 +160,17 @@ h2
   letter-spacing: 0.12em;
 }
 
+/* 旧「Keio SFC...」行を Spark 表示（大きく・斜体） */
+.app-header__eyebrow--spark {
+  font-size: clamp(22px, 4.2vw, 34px);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  line-height: 1.12;
+  margin: 0;
+}
+
 .app-header__title {
   font-family: 'Mochiy Pop One', var(--font-display);
   font-size: 25px;
@@ -1660,7 +1671,7 @@ body {
     padding-right: 14px;
   }
 
-  .app-header__eyebrow {
+  .app-header__eyebrow:not(.app-header__eyebrow--spark) {
     font-size: 13px;
   }
 
@@ -1735,7 +1746,7 @@ body {
     padding-right: 10px;
   }
 
-  .app-header__eyebrow {
+  .app-header__eyebrow:not(.app-header__eyebrow--spark) {
     font-size: 11px;
   }
 
