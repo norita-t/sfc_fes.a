@@ -1703,7 +1703,7 @@ body {
 
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
   font-family: var(--font-biz-ud-gothic);
-  font-size: clamp(22px, 4.2vw, 28px);
+  font-size: clamp(12px, 4.2vw, 28px);
   font-weight: 700;
   letter-spacing: 0.03em;
   line-height: 1.2;
