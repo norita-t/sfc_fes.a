@@ -8,9 +8,9 @@ export function renderShell({ routeName, pageClass = '', content }) {
   const isHome = routeName === 'home';
   const homeBackRail = isHome
     ? ''
-    : `<nav class="app-home-rail" aria-label="ホームに戻る">
-          <button class="app-home-rail__link" type="button" data-route="/" aria-label="ホームへ戻る">
-            <span class="app-home-rail__arrow" aria-hidden="true">←</span>ホーム
+    : `<nav class="app-home-rail" aria-label="ホームへ移動">
+          <button class="app-home-rail__link" type="button" data-route="/" aria-label="ホームへ">
+            <span class="app-home-rail__arrow" aria-hidden="true">←</span>Home
           </button>
         </nav>`;
 
