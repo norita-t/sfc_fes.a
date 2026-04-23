@@ -1636,6 +1636,16 @@ export const contentBlocks = [
   },
 ];
 
+/** ホーム下部「お知らせ」欄（管理画面の「お知らせ」から編集） */
+export const announcements = [
+  {
+    id: 'welcome-2025',
+    title: 'アプリから学祭をナビ',
+    body: '企画・ステージ・マップ・飲食をこの1本で案内しています。最新情報は当日も随時チェックしてください。',
+    sortOrder: 1,
+  },
+];
+
 export const festivalTheme = {
   title: '第34回文化祭 SPARK',
   subtitle: '2025年のテーマビジュアルをホーム先頭に表示します。',
