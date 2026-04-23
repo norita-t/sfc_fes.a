@@ -63,22 +63,27 @@ function renderPictogramIcon(icon) {
 }
 
 export function renderQuickLink(label, route, hint, icon, hintClass = '', linkClass = '') {
-    console.log(icon);
-    const iconHTML = icon
-        ? `<img src="${escapeHTML(icon)}" alt="" />`
-        : escapeHTML(label.slice(0, 1));
+  const iconHTML = icon
+    ? `<img src="${escapeHTML(icon)}" alt="" />`
+    : escapeHTML(label.slice(0, 1));
 
-    const hintClasses = ['quick-link__hint', hintClass].filter(Boolean).join(' ');
-    const buttonClasses = ['quick-link', linkClass].filter(Boolean).join(' ');
+  const hasHint = hint && String(hint).trim();
+  const hintClassStr = hasHint
+    ? ['quick-link__hint', hintClass].filter(Boolean).join(' ')
+    : '';
+  const hintBlock = hasHint
+    ? `<span class="${escapeHTML(hintClassStr)}">${escapeHTML(hint)}</span>`
+    : '';
+  const buttonClasses = ['quick-link', linkClass].filter(Boolean).join(' ');
 
-    return `
+  return `
     <button class="${escapeHTML(buttonClasses)}" data-route="${escapeHTML(route)}">
       <span class="quick-link__icon" aria-hidden="true">
         ${iconHTML}
       </span>
       <span class="quick-link__body">
         <strong>${escapeHTML(label)}</strong>
-        <span class="${escapeHTML(hintClasses)}">${escapeHTML(hint)}</span>
+        ${hintBlock}
       </span>
     </button>
   `;

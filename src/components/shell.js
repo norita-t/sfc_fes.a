@@ -6,11 +6,9 @@ export function renderShell({ routeName, pageClass = '', content }) {
   const themeIcon = getThemeToggleIcon();
   const themeLabel = getThemeToggleLabel();
   const isHome = routeName === 'home';
-  const homeButton = `<button class="header-chip-button header-chip-button--home${
-    isHome ? ' is-active' : ''
-  }" type="button" data-route="/" aria-label="ホームへ"${
-    isHome ? ' aria-current="page"' : ''
-  }>ホーム<span class="header-chip-button__arrow" aria-hidden="true">⇒</span></button>`;
+  const homeButton = isHome
+    ? ''
+    : `<button class="header-chip-button header-chip-button--home" type="button" data-route="/" aria-label="ホームへ">ホーム<span class="header-chip-button__arrow" aria-hidden="true">⇒</span></button>`;
 
   return `
     <div class="app-shell ${shellModeClass}">

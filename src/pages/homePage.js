@@ -50,9 +50,9 @@ export const homePage = {
         ${renderQuickLink(
           'マップ',
           '/map',
-          '地図から企画やトイレ等の検索が可能です。',
+          '地図で企画・施設等を探せます。',
           'assets/img/map.png',
-          'quick-link__hint--map-pop',
+          '',
           'quick-link--home-primary',
         )}
         ${renderQuickLink(
@@ -71,18 +71,11 @@ export const homePage = {
           '',
           'quick-link--home-primary',
         )}
-        ${renderQuickLink(
-          '飲食',
-          '/food',
-          '模擬店・フードの情報をチェックできます。',
-          'assets/img/food.png',
-          '',
-          'quick-link--home-secondary',
-        )}
+        ${renderQuickLink('飲食', '/food', '', 'assets/img/food.png', '', 'quick-link--home-secondary')}
         ${renderQuickLink(
           'お気に入り',
           '/favorites',
-          '登録した企画へすぐ飛べます。',
+          '',
           'assets/img/map.png',
           '',
           'quick-link--home-secondary',

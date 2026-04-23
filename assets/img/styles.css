@@ -119,6 +119,7 @@ h2
   top: 0;
   z-index: 40;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -126,6 +127,11 @@ h2
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(231, 235, 243, 0.88);
+}
+
+.app-header > div:first-of-type {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .app-header__eyebrow,
@@ -163,8 +169,11 @@ h2
 
 .app-header__actions {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
+  max-width: 100%;
 }
 
 .header-chip-button {
@@ -178,6 +187,8 @@ h2
   font-weight: 400;
   letter-spacing: 0.02em;
   border: 1px solid transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .header-chip-button.is-active {
@@ -375,16 +386,6 @@ h2
         font-size: 13px;
         line-height: 1.45;
     }
-
-/* マップカード説明: 水色（キャッシュ・継承で黒に戻るのを防ぐ） */
-.quick-link__body span.quick-link__hint--map-pop,
-.app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
-  font-family: 'Mochiy Pop One', var(--font-ui);
-  color: #0891b2 !important;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-}
 
 
 
@@ -1592,16 +1593,16 @@ body {
   font-size: 15px;
 }
 
-/* ホーム: クイックリンクのラベル（サイズは維持、本文の UI 字体で整える） */
+/* ホーム: クイックリンクのラベル（明朝系） */
 .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
-  font-family: var(--font-ui);
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', '游明朝体', 'Noto Serif JP', 'MS PMincho', serif;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
 
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
-  font-family: var(--font-ui);
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho Pro', '游明朝体', 'Noto Serif JP', 'MS PMincho', serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -1726,13 +1727,32 @@ body {
 
 @media (max-width: 360px) {
   .app-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .app-header__eyebrow {
+    font-size: 11px;
+  }
+
+  .app-header__title {
+    font-size: 19px;
   }
 
   .app-header__actions {
     justify-content: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .header-chip-button {
+    min-width: auto;
+    padding: 7px 9px;
+    font-size: 12px;
   }
 
   .selection-grid:not(.selection-grid--single) {
@@ -2813,12 +2833,6 @@ color: var(--text);
 color: var(--text-muted);
 }
 
-:root[data-theme="dark"] .quick-link__body span.quick-link__hint--map-pop,
-:root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body span.quick-link__hint--map-pop {
-  color: #5eead4 !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-}
-
 :root[data-theme="dark"] .field__label {
 color: var(--text-soft);
 }
@@ -3252,6 +3266,8 @@ padding: 15px;
   line-height: 1;
   box-shadow: var(--shadow-inset, none);
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .theme-toggle:hover {
