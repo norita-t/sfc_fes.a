@@ -139,6 +139,21 @@ h2
   line-height: 1.15;
 }
 
+/* ヘッダー: ポップ体・大きめ */
+.app-header__eyebrow {
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.app-header__title {
+  font-family: 'Mochiy Pop One', var(--font-display);
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+
 .app-header__actions {
   display: flex;
   align-items: center;
@@ -151,8 +166,10 @@ h2
   border-radius: 999px;
   background: var(--surface-muted);
   color: var(--text-soft);
-  font-size: 13px;
-  font-weight: 700;
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   border: 1px solid transparent;
 }
 
@@ -1323,8 +1340,7 @@ h2
 
 .section-header h2,
 .detail-hero__body h2,
-.hero-panel__copy h2,
-.app-header__title {
+.hero-panel__copy h2 {
   letter-spacing: -0.03em;
 }
 
@@ -1445,11 +1461,6 @@ body {
   gap: 2px;
 }
 
-.app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body span.quick-link__hint {
   font-size: 12px;
   line-height: 1.35;
@@ -1494,6 +1505,21 @@ body {
 
 .app-shell--public .quick-link__body strong {
   font-size: 15px;
+}
+
+/* ホーム: クイックリンクのラベルをやや大きく、ポップ体に */
+.app-shell--public .quick-grid--home .quick-link--home-primary .quick-link__body strong {
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.app-shell--public .quick-grid--home .quick-link--home-secondary .quick-link__body strong {
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 :root[data-theme="dark"] .app-shell--public .quick-grid--home .quick-link--home-primary {
@@ -1548,14 +1574,18 @@ body {
     padding-right: 14px;
   }
 
+  .app-header__eyebrow {
+    font-size: 13px;
+  }
+
   .app-header__title {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .header-chip-button {
     min-width: auto;
     padding: 9px 12px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .app-shell--public .page {
@@ -1864,9 +1894,11 @@ body {
 }
 
 .bottom-nav__label {
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1.15;
+  font-family: 'Mochiy Pop One', var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
 }
 
 .bottom-nav__item.is-active .bottom-nav__icon-box {
@@ -1933,7 +1965,7 @@ body {
   }
 
   .bottom-nav__label {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .bottom-nav__icon-box {
@@ -2493,8 +2525,8 @@ color: var(--primary);
 }
 
 :root[data-theme="dark"] .app-header__title {
-color: var(--text);
-  letter-spacing: -0.04em;
+  color: var(--text);
+  letter-spacing: 0.04em;
 }
 
 :root[data-theme="dark"] .header-chip-button {
@@ -3742,8 +3774,8 @@ padding: 15px;
 }
 
 .bottom-nav__label {
-  font-size: 9.5px;
-  line-height: 1.08;
+  font-size: 10.5px;
+  line-height: 1.1;
 }
 
 .festival-map__canvas {
@@ -3811,7 +3843,7 @@ padding: 15px;
   }
 
   .bottom-nav__label {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .festival-map__canvas {
@@ -3835,7 +3867,7 @@ padding: 15px;
   }
 
   .bottom-nav__label {
-    font-size: 8.6px;
+    font-size: 9.5px;
   }
 }
 

@@ -18,7 +18,7 @@ export const homePage = {
         ${renderQuickLink(
           '企画',
           '/projects',
-          '全ての企画あああり込み検索が可能です。',
+          '一覧の表示や条件検索で企画を探せます。',
           'assets/img/attractions.png',
           '',
           'quick-link--home-primary',
@@ -26,13 +26,27 @@ export const homePage = {
         ${renderQuickLink(
           'ステージ公演',
           '/stage',
-          '公演の時間と場所の確認をすることができます。',
+          '開演時間と会場（ステージ）をまとめて確認。',
           'assets/img/event.png',
           '',
           'quick-link--home-primary',
         )}
-        ${renderQuickLink('飲食', '/food', 'あああああ。', 'assets/img/food.png', '', 'quick-link--home-secondary')}
-        ${renderQuickLink('お気に入り', '/favorites', '保存した企画', 'assets/img/map.png', '', 'quick-link--home-secondary')}
+        ${renderQuickLink(
+          '飲食',
+          '/food',
+          '模擬店・フードの情報をチェックできます。',
+          'assets/img/food.png',
+          '',
+          'quick-link--home-secondary',
+        )}
+        ${renderQuickLink(
+          'お気に入り',
+          '/favorites',
+          '登録した企画へすぐ飛べます。',
+          'assets/img/map.png',
+          '',
+          'quick-link--home-secondary',
+        )}
       </section>
     `;
   },
