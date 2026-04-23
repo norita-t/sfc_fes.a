@@ -62,16 +62,17 @@ function renderPictogramIcon(icon) {
   return `<span class="quick-link__letter">${escapeHTML(icon)}</span>`;
 }
 
-export function renderQuickLink(label, route, hint, icon, hintClass = '') {
+export function renderQuickLink(label, route, hint, icon, hintClass = '', linkClass = '') {
     console.log(icon);
     const iconHTML = icon
         ? `<img src="${escapeHTML(icon)}" alt="" />`
         : escapeHTML(label.slice(0, 1));
 
     const hintClasses = ['quick-link__hint', hintClass].filter(Boolean).join(' ');
+    const buttonClasses = ['quick-link', linkClass].filter(Boolean).join(' ');
 
     return `
-    <button class="quick-link" data-route="${escapeHTML(route)}">
+    <button class="${escapeHTML(buttonClasses)}" data-route="${escapeHTML(route)}">
       <span class="quick-link__icon" aria-hidden="true">
         ${iconHTML}
       </span>
