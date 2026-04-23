@@ -1,5 +1,5 @@
 const items = [
-  { route: '/', label: 'ホーム', icon: 'home', match: ['home'] },
+  { route: '/', label: 'さとうのあ', icon: 'home', match: ['home'] },
   { route: '/projects', label: '企画', icon: 'projects', match: ['events', 'event-detail'] },
   { route: '/map', label: 'マップ', icon: 'map', match: ['map'] },
   { route: '/stage', label: 'ステージ', icon: 'stage', match: ['timetable', 'stage-detail'] },
