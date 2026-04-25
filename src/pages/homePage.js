@@ -13,7 +13,7 @@ export const homePage = {
     </section>
 
     <section class="quick-grid quick-grid--home">
-      ${renderQuickLink('マップ', '/map', 'Map', "assets/img/map.png")}
+      ${renderQuickLink('マ', '/map', 'Map', "assets/img/map.png")}
       ${renderQuickLink('企画', '/projects', 'Projects', "assets/img/attractions.png")}
       ${renderQuickLink('ステージ公演', '/stage', 'Stage events', "assets/img/event.png")}
       ${renderQuickLink('飲食', '/food', 'Foods', "assets/img/food.png")}
