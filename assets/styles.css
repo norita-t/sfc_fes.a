@@ -727,7 +727,7 @@ h2
 .area-chip:hover,
 .header-chip-button:hover,
 .favorite-button:hover {
-  transform: translateY(-1px);
+  transform: translateY(0px);
 }
 
 .detail-hero {
@@ -6016,4 +6016,35 @@ padding: 15px;
   background: rgba(96, 165, 250, 0.13);
   border-color: rgba(96, 165, 250, 0.28);
   color: #dbeafe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (hover: none) {
+    .quick-link:hover {
+        transform: none;
+    }
+
+    .quick-link::before {
+        display: none;
+    }
+
+    .quick-link:active {
+        transform: scale(0.97);
+        background: #457b96;
+        color: white;
+    }
+
+        .quick-link:active .quick-link__body span {
+            color: white;
+        }
 }
