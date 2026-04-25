@@ -7,9 +7,9 @@ export const homePage = {
 
 
     <section class="quick-grid quick-grid--home3">
-      <img src="assets/img/date.png" alt="日にち">
-      <img src="assets/img/date.png" alt="日にち">
-      <img src="assets/img/date.png" alt="日にち">
+      <img class="home-img"img src="assets/img/date.png" alt="日にち">
+      <img class="home-title-img"img src="assets/img/文化祭.png" alt="日にち">
+      <img class="home-img"img src="assets/img/date.png" alt="日にち">
     </section>
 
     <section class="quick-grid quick-grid--home">
