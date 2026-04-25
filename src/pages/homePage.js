@@ -5,6 +5,13 @@ export const homePage = {
   render(context) {
     return `
 
+
+    <section class="quick-grid quick-grid--home3">
+      <img src="assets/img/date.png" alt="日にち">
+
+      <img src="assets/img/date.png" alt="日にち">
+    </section>
+
     <section class="quick-grid quick-grid--home">
       ${renderQuickLink('マップ', '/map', 'Map', "assets/img/map.png")}
       ${renderQuickLink('企画', '/projects', 'Projects', "assets/img/attractions.png")}
@@ -18,6 +25,7 @@ export const homePage = {
       <img src="assets/img/2.jpg" alt="画像2">
       <img src="assets/img/3.jpg" alt="画像3">
     </div>
+
 </div>
     `;
   },
