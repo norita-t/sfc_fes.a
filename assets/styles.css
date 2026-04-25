@@ -239,7 +239,10 @@ h2
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 18px;
+
+
 }
+
 
 
 /*.quick-link {
@@ -362,12 +365,12 @@ h2
 
 
 .home-img {
-    width: 75%;
+    width: 100%;
     height: auto;
 }
 
 .home-title-img {
-    width: 150%;
+    width: 100%;
     height: auto;
 }
 
@@ -1432,7 +1435,10 @@ body {
 
 .app-shell--public .quick-grid3,
 .app-shell--public .quick-grid--home3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    gap: 0px;
+    margin-top: 18px;
 }
 
 .app-shell--public .detail-hero,
