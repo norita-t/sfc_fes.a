@@ -8,12 +8,12 @@ export const homePage = {
 
     <section class="quick-grid quick-grid--home3">
       <img src="assets/img/date.png" alt="日にち">
-
+      <img src="assets/img/date.png" alt="日にち">
       <img src="assets/img/date.png" alt="日にち">
     </section>
 
     <section class="quick-grid quick-grid--home">
-      ${renderQuickLink('マ', '/map', 'Map', "assets/img/map.png")}
+      ${renderQuickLink('マップ', '/map', 'Map', "assets/img/map.png")}
       ${renderQuickLink('企画', '/projects', 'Projects', "assets/img/attractions.png")}
       ${renderQuickLink('ステージ公演', '/stage', 'Stage events', "assets/img/event.png")}
       ${renderQuickLink('飲食', '/food', 'Foods', "assets/img/food.png")}
