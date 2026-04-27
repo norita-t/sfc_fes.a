@@ -304,7 +304,7 @@ export const mapPage = {
     const locationEvents = getProjectsAtLocation(context, selectedLocation.id);
     const locationFood = getFoodAtLocation(context, selectedLocation.id);
 
-    return /*
+    return `
       <section class="section-block">
         ${renderSectionHeader('マップ', context.getText('map-page-subtitle', '全体図と各階の詳細を、同じ見た目の統合マップで切り替えられます'))}
         ${renderFloorTabs(context)}
@@ -329,7 +329,7 @@ export const mapPage = {
 
       <section class="section-block section-block--tight-top section-block--map-pullup">
         ${renderMapPullup(context, selectedLocation, locationEvents, locationFood)}
-      </section>*/
+      </section>`
     ;
   },
 
