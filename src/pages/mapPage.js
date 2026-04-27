@@ -244,8 +244,8 @@ function renderFloorNote(context, selectedLocation) {
 
 function renderMapPullup(context, selectedLocation, locationEvents, locationFood) {
   const expanded = pageState.sheetExpanded;
-  return `
-    <aside class="map-pullup ${expanded ? 'is-expanded' : ''}" aria-label="選択中の場所の詳細">
+  return 
+/*    <aside class="map-pullup ${expanded ? 'is-expanded' : ''}" aria-label="選択中の場所の詳細">
       <button class="map-pullup__handle" type="button" data-map-sheet-toggle aria-expanded="${String(expanded)}">
         <span class="map-pullup__bar" aria-hidden="true"></span>
         <span class="map-pullup__summary">
@@ -293,8 +293,8 @@ function renderMapPullup(context, selectedLocation, locationEvents, locationFood
             : ''}
         </div>
       </div>
-    </aside>
-  `;
+    </aside>*/
+  ;
 }
 
 export const mapPage = {
@@ -304,7 +304,7 @@ export const mapPage = {
     const locationEvents = getProjectsAtLocation(context, selectedLocation.id);
     const locationFood = getFoodAtLocation(context, selectedLocation.id);
 
-    return `
+    return /*
       <section class="section-block">
         ${renderSectionHeader('マップ', context.getText('map-page-subtitle', '全体図と各階の詳細を、同じ見た目の統合マップで切り替えられます'))}
         ${renderFloorTabs(context)}
@@ -319,9 +319,9 @@ export const mapPage = {
               <div class="legend-item"><span class="legend-dot legend-dot--selected"></span> 選択中</div>
             </div>
           </div>
-          `/*<div class="festival-map__canvas">
+          <div class="festival-map__canvas">
             ${renderFloorMap(context, selectedLocation.id)}
-          </div >*/`
+          </div >
           ${renderFloorNote(context, selectedLocation)}
         </article>
       </section>
@@ -329,8 +329,8 @@ export const mapPage = {
 
       <section class="section-block section-block--tight-top section-block--map-pullup">
         ${renderMapPullup(context, selectedLocation, locationEvents, locationFood)}
-      </section>
-    `;
+      </section>*/
+    ;
   },
 
   bind(root, context) {
