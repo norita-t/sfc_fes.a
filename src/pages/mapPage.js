@@ -169,7 +169,7 @@ function renderFloorMap(context, selectedLocationId) {
 
   return `
     <svg class="festival-map" viewBox="${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${escapeHTML(floor.title)}">
-      <rect class="festival-map__background" x="${viewBox.x}" y="${viewBox.y}" width="${viewBox.width}" height="${viewBox.height}" rx="36" />
+      `/*< rect class="festival-map__background" x = "${viewBox.x}" y = "${viewBox.y}" width = "${viewBox.width}" height = "${viewBox.height}" rx = "36" />*/`
       ${regionsMarkup}
     </svg>
   `;
