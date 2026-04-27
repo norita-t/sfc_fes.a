@@ -319,9 +319,9 @@ export const mapPage = {
               <div class="legend-item"><span class="legend-dot legend-dot--selected"></span> 選択中</div>
             </div>
           </div>
-          <div class="festival-map__canvas">
+          `/*<div class="festival-map__canvas">
             ${renderFloorMap(context, selectedLocation.id)}
-          </div>
+          </div >*/`
           ${renderFloorNote(context, selectedLocation)}
         </article>
       </section>
