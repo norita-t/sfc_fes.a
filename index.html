@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="SFC Festival Guide は、慶應SFCの学園祭向けデジタルパンフレット兼ナビゲーションアプリです。"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>SFC Festival Guide</title>
+    <script>
+      (() => {
+        const key = 'sfc-festival-guide-theme-v2';
+        let theme = 'light';
+        try {
+          const saved = window.localStorage.getItem(key);
+          if (saved === 'light' || saved === 'dark') theme = saved;
+        } catch {}
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0b1020' : '#ffffff');
+      })();
+    </script>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
