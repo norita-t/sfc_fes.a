@@ -19,7 +19,12 @@ export const homePage = {
       ${renderQuickLink('飲食', '/food', 'Foods', "assets/img/food.png")}
     </section>
 
-  
+    <div class="slider">
+      <div class="slider-track" id="sliderTrack">
+      <img src="assets/img/1.jpg" alt="画像1">
+      <img src="assets/img/2.jpg" alt="画像2">
+      <img src="assets/img/3.jpg" alt="画像3">
+    </div>
 
 </div>
     `;
