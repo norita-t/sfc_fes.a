@@ -62,10 +62,12 @@ function renderPictogramIcon(icon) {
   return `<span class="quick-link__letter">${escapeHTML(icon)}</span>`;
 }
 
-export function renderQuickLink(label, route, hint, icon = label.slice(0, 1)) {
+export function renderQuickLink(label, route, hint, icon) {
   return `
     <button class="quick-link" data-route="${escapeHTML(route)}">
-      <span class="quick-link__icon" aria-hidden="true">${renderPictogramIcon(icon)}</span>
+      <span class="quick-link__icon" aria-hidden="true">
+        <img src="${icon}" alt="">
+      </span>
       <span class="quick-link__body">
         <strong>${escapeHTML(label)}</strong>
         <span>${escapeHTML(hint)}</span>
@@ -73,6 +75,8 @@ export function renderQuickLink(label, route, hint, icon = label.slice(0, 1)) {
     </button>
   `;
 }
+
+
 
 export function renderMetaRow(label, value) {
   return `
